@@ -1,0 +1,11 @@
+Ce projet a un depot GIT local
+
+
+Ajoute un fichier à la gestion de versions :
+git add mon_fichier.txt
+
+Commit (enregistrer version)
+git commit -m "Commentaire de version"
+
+Si tu veux annuler les changements non commités :
+git checkout -- mon_fichier.txt
