@@ -1,0 +1,45 @@
+# =========================
+# macOS
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# =========================
+# KiCad backups/temp
+# =========================
+*-backups/
+*.bak
+*.bck
+*.kicad_prl
+*.autosave
+
+# Fichiers temporaires KiCad
+_fp-info-cache
+*.lck
+
+# =========================
+# LTspice
+# =========================
+*.raw
+*.op.raw
+*.net
+
+# =========================
+# Firmware / PlatformIO
+# =========================
+.pio/
+.vscode/
+build/
+dist/
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.pyc
+
+# =========================
+# Logs
+# =========================
+*.log

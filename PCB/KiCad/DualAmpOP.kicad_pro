@@ -510,12 +510,12 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "../../Documentations/PCB/v2_0/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",
       "svg": "",
-      "vrml": ""
+      "vrml": "3D/DualAmpOP.wrl"
     },
     "page_layout_descr_file": "kicad-embed://Digipict_cartouche_v2.kicad_wks"
   },

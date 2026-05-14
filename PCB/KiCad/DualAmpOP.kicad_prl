@@ -61,7 +61,7 @@
     "ssh_key": ""
   },
   "meta": {
-    "filename": "ampli_op.kicad_prl",
+    "filename": "DualAmpOP.kicad_prl",
     "version": 5
   },
   "net_inspector_panel": {
