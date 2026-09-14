@@ -1,70 +1,63 @@
-
 # DualAmpOP
 
-<!--
-![Photo du montage](docs/images/hero.jpg)
--->
+[cschopfer/DualAmpOP](https://github.com/cschopfer/DualAmpOP)
 
-PCB pour un montage universel d'ampli OP double SOIC-8 dont le pinning est compatible LM358
+Un petit PCB pour avoir un ampli-op double disponible pour vos bricolages sur breadboard.
 
-**Statut :**  🟡 Prototype fonctionnel 
+![PCB DualAmpOP v2.0](docs/images/IMG_3928.jpeg)
 
----
+**Statut :** prototype v2.0 monté et testé, fonctionne très bien.
+Cette v2.0 remplace une v1 qui n'a jamais été produite.
 
-## Caractéristiques
+## Le principe
 
-- Compatible LM358, MCP6002, etc
-- Fonction principale 2 amplis utilisable en serie ou individuelement 
-- Alimentation : Vcc/GND ou Vcc-Vdd
-- Interfaces : Multiple câblage possible (amp inverseur/non inverseur/suiveur/filtre/etc)
+Le PCB accepte tout double ampli-op compatible broche à broche en boîtier
+SOIC-8 — LM358, MCP6002, etc.
 
-## Structure du repo
+Chaque étage dispose d'un réseau de résistances (R1 à R8 pour le premier
+étage, R9 à R17 pour le second, sur le même principe) qu'il suffit de
+câbler pour obtenir la topologie voulue :
 
-| Dossier | Contenu |
-|---|---|
-| `hardware/` | Projet KiCad, Gerbers, BOM |
-| `simulation/` | Simulations LTspice / KiCad |
-| `mechanical/` | Fichiers FreeCAD/Fusion, STL |
-| `firmware/` | Code PlatformIO / Arduino |
-| `docs/` | Photos, datasheets, notices |
+- **n.m.** — ne rien monter
+- **0 Ω** — un pont (connexion directe)
+- **valeur** — une vraie résistance, pour régler un gain ou une fréquence de coupure
 
-## Bill of Materials (BOM)
+## Configurations
 
-Composants principaux (liste complète : [`hardware/bom/DualAmpOP.csv`](hardware/bom/DualAmpOP.csv))
+| Montage | R1 | R2 | R3 | R4 | R5 | R6 | R7 | R8 | Gain / formule |
+|---|---|---|---|---|---|---|---|---|---|
+| Inverseur | valeur | n.m. | valeur | n.m. | 0 Ω | n.m. | n.m. | n.m. | `Vout = −Vin·(R3/R1)` |
+| Non-inverseur | n.m. | 0 Ω | valeur | n.m. | n.m. | n.m. | valeur | 0 Ω | `Vout = Vin·(1 + R3/R7)` |
+| Transimpédance | 0 Ω | n.m. | Rf | n.m. | 0 Ω | n.m. | n.m. | n.m. | `Vout = −Iin·R3` |
+| Suiveur | n.m. | 0 Ω | 0 Ω | n.m. | n.m. | n.m. | n.m. | 0 Ω | `Vout = Vin` |
+| Passe-bas actif (intégrateur) | R | n.m. | C* | n.m. | n.m. | n.m. | n.m. | n.m. | `fc = 1/(2πRC)` |
+| Passe-haut actif | — | — | — | — | — | — | — | — | à venir |
+| Sallen-Key | — | — | — | — | — | — | — | — | à venir |
 
-| Réf. | Composant | Valeur | Boîtier | Qté |
-|---|---|---|---|---|
-| U1 | ... | ... | ... | 1 |
-| R1-R4 | Résistance | ... | 0805 | 4 |
+\* Pour les filtres actifs, la résistance concernée est remplacée par un
+condensateur céramique 0805 de même taille.
 
-## Fabrication du PCB
+### Alimentation symétrique ou asymétrique
 
-Gerbers prêts à l'emploi dans [`PCB/exports/gerbers/`](PCB/exports/gerbers/), ou directement depuis la dernière [Release](../../releases).
+R10 relie le rail V- à la masse.
 
-- Nombre de couches : 2
-- Finition : HASL
-- Dimensions : ... x ... mm
+- **Non montée** : alimentation symétrique (Vcc+ / Vcc-)
+- **Montée à 0 Ω** : alimentation asymétrique, entre Vcc et GND
 
-<!--
-## Impression 3D
+## Arborescence
 
-Fichiers STL dans [`mechanical/stl/`](mechanical/stl/).
+```
+hardware/
+  DualAmpOP.kicad_pro
+  exports/
+    PDF/
+    gerbers/
+    3D/
+docs/
+  images/
+    IMG_3928.jpeg
+```
 
-- Matériau conseillé : PETG / PLA
-- Support : oui/non
-- Hauteur de couche : 0.2 mm
--->
+## Licence
 
-## Schémas et plans
-
-- [Schéma électrique (PDF)](PCB/export/PDF/DualAmpOP_v2_0_schema)
-
-
-## Historique des versions
-
-Voir [CHANGELOG.md](CHANGELOG.md).
-
-
-## Auteur
-
-Cédric Schöpfer — [digipict.ch](https://digipict.ch)
+À définir.
